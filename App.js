@@ -13,7 +13,7 @@ function HomeScreen({ navigation }) {
         title="Go to notifications"
       />
       <Text>{'\n'}</Text>
-      
+
       <Button
         title="Go to Login"
         onPress={() => navigation.navigate('Login')}
@@ -37,8 +37,9 @@ function MainDrawer() {
   return (
 
     <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      <Drawer.Screen name="Home" component={HomeScreen} />
+      <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+      <Drawer.Screen name="Settings" component={Settings} />
     </Drawer.Navigator>
   );
 }
@@ -52,10 +53,11 @@ function Profile() {
   );
 }
 
-function Settings() {
+function Settings({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>Settings Screen</Text>
+      <Button onPress={() => navigation.goBack()} title="Go back Home" />
     </View>
   );
 }
@@ -69,9 +71,24 @@ function Login({ navigation }) {
         onPress={() => navigation.navigate('MainDrawer')}
       />
 
-      
+      <Button
+        title="Cadastro"
+        onPress={() => navigation.navigate('cadastro')}
+      />
     </View>
   );
+}
+
+function Cadastro({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Login</Text>
+      <Button
+        title="Go to MainDrawer"
+        onPress={() => navigation.navigate('MainDrawer')}
+      />
+    </View>
+  )
 }
 
 const Stack = createNativeStackNavigator();
@@ -88,6 +105,7 @@ function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen
       </Stack.Navigator>
     </NavigationContainer>
   );

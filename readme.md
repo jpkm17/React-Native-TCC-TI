@@ -9,7 +9,6 @@ npm install @react-navigation/drawer
 
 expo install react-native-gesture-handler react-native-reanimated
 
-
 Add in file babel.config.js
 
 module.exports = {
