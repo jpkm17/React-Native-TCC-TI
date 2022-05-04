@@ -40,6 +40,7 @@ function MainDrawer() {
       <Drawer.Screen name="Home" component={HomeScreen} />
       <Drawer.Screen name="Notifications" component={NotificationsScreen} />
       <Drawer.Screen name="Settings" component={Settings} />
+      <Drawer.Screen name="Cadastro" component={Cadastro}/>
     </Drawer.Navigator>
   );
 }
@@ -105,7 +106,7 @@ function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen
+        <Stack.Screen name="Cadastro" component={Cadastro}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
