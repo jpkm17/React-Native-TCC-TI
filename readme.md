@@ -16,3 +16,16 @@ module.exports = {
   plugins: ['react-native-reanimated/plugin'],
 };
 
+  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+     <Text>Login Screen</Text>
+       <Button
+         title="Go to MainDrawer"
+         onPress={() => navigation.navigate('MainDrawer')}
+       />
+       <Text>{'\n'}</Text>
+
+      <Button
+        title="Cadastro"
+        onPress={() => navigation.navigate('Cadastro')}
+      /> */}
+    </View>
