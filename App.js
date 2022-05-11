@@ -74,7 +74,7 @@ function Login({ navigation }) {
 
       <Button
         title="Cadastro"
-        onPress={() => navigation.navigate('cadastro')}
+        onPress={() => navigation.navigate('Cadastro')}
       />
     </View>
   );
@@ -83,7 +83,8 @@ function Login({ navigation }) {
 function Cadastro({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Login</Text>
+      <Text>Tela de cadastro</Text>
+      
       <Button
         title="Go to MainDrawer"
         onPress={() => navigation.navigate('MainDrawer')}
