@@ -29,3 +29,22 @@ module.exports = {
         onPress={() => navigation.navigate('Cadastro')}
       /> */}
     </View>
+
+
+    // function App() {
+//   return (
+//     <NavigationContainer>
+//       <Stack.Navigator initialRouteName="Login">
+//         <Stack.Screen
+//           name="MainDrawer"
+//           component={MainDrawer}
+//           options={{ headerShown: false }}
+//         />
+//         <Stack.Screen name="Login" component={Login} />
+//         <Stack.Screen name="Profile" component={Profile} />
+//         <Stack.Screen name="Settings" component={Settings} />
+//         <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
+//       </Stack.Navigator>
+//     </NavigationContainer>
+//   );
+// }
