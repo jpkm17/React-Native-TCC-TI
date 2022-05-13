@@ -30,6 +30,7 @@ export function Login({ navigation }) {
         <Text>{'\n'}</Text>
         
         <Button
+          color="#a80601"
           title="Cadastro"
           onPress={() => navigation.navigate('Cadastro')}
           style={styles.button}
