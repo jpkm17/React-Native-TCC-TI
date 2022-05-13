@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { Button, View, Text, Image, TextInput } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { Button, View, Text,} from 'react-native';
+
 
 export function NotificationsScreen({ navigation }) {
     return (
