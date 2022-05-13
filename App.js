@@ -16,23 +16,29 @@ import { Login } from './src/screens/login/login'
 
 const Drawer = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
-export default function App() {
+
+function MainDrawer() {
+  return (
+      <NavigationContainer>
+          <Drawer.Navigator initialRouteName="Home">
+              <Drawer.Screen name="Home" component={HomeScreen} />
+              <Drawer.Screen name="Notifications" component={NotificationsScreen} />
+              <Drawer.Screen name="Settings" component={Settings} />
+              <Drawer.Screen name="Cadastro" component={Cadastro} />
+          </Drawer.Navigator>
+      </NavigationContainer>
+  )
+}
+
+function App() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={HomeScreen} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-        <Drawer.Screen name="Settings" component={Settings} />
-        <Drawer.Screen name="Cadastro" component={Cadastro} />
-      </Drawer.Navigator>
-
-
       <Stack.Navigator initialRouteName="Login">
-        {/* <Stack.Screen
+        <Stack.Screen
           name="MainDrawer"
           component={MainDrawer}
           options={{ headerShown: false }}
-        /> */}
+        />
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Settings" component={Settings} />
@@ -42,3 +48,4 @@ export default function App() {
 
   )
 }
+export default App;
