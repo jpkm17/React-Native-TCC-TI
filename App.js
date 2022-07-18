@@ -1,4 +1,5 @@
 // import * as React from 'react';
+
 // import { View } from 'react-native';
 // import { NavigationContainer } from '@react-navigation/native';
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -51,14 +52,16 @@
 // export default App;
 
 
+
+
 import * as React from 'react';
-
-import CustomDrawer from './CustomDrawer';
-
 import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+
+import CustomDrawer from './CustomDrawer';
+
 function HomeScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -83,6 +86,7 @@ function NotificationsScreen({ navigation }) {
     </View>
   );
 }
+
 const Drawer = createDrawerNavigator();
 function MainDrawer() {
     return (
@@ -163,3 +167,8 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
