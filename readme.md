@@ -1,3 +1,4 @@
+npm install --global expo-cli
 
 npm install @react-navigation/native
 

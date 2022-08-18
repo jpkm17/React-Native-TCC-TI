@@ -18,3 +18,5 @@ export function MainDrawer() {
         </NavigationContainer>
     )
 }
+
+// tem que finalizar essa navegação entre as telas
