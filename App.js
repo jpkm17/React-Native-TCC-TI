@@ -73,12 +73,12 @@ function Login({ navigation }) {
 
       <Button
         title="Cadastro"
-        onPress={() => navigation.navigate('cadastro')}
+        onPress={() => navigation.navigate('Cadastro')}
       />
 
       <Button
         title="Consultar cep"
-        onPress={() => navigation.navigate('cep')}
+        onPress={() => navigation.navigate('Cep')}
       />
     </View>
   );
@@ -162,7 +162,7 @@ function App() {
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
-        <Stack.Screen name="cep" component={Cep} />
+        <Stack.Screen name="Cep" component={Cep} />
       </Stack.Navigator>
     </NavigationContainer>
   );
