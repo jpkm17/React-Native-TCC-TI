@@ -1,60 +1,5 @@
 // import * as React from 'react';
-
-// import { View } from 'react-native';
-// import { NavigationContainer } from '@react-navigation/native';
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import { createDrawerNavigator } from '@react-navigation/drawer';
-// import 'react-native-gesture-handler';
-
-// import { HomeScreen } from './src/screens/home/home';
-// import { NotificationsScreen } from './src/screens/notifications/notif';
-// import { Settings } from './src/screens/settings/settings';
-// import { Cadastro } from './src/screens/cadastro/cadastro';
-
-// import { Profile } from './src/screens/profile/profile'
-// import { Login } from './src/screens/login/login'
-
-
-// const Drawer = createDrawerNavigator();
-// const Stack = createNativeStackNavigator();
-
-// function MainDrawer() {
-//   return (
-//       <NavigationContainer>
-//           <Drawer.Navigator initialRouteName="Home">
-//               <Drawer.Screen name="Home" component={HomeScreen} />
-//               <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-//               <Drawer.Screen name="Settings" component={Settings} />
-//               <Drawer.Screen name="Cadastro" component={Cadastro} />
-//           </Drawer.Navigator>
-//       </NavigationContainer>
-//   )
-// }
-
-// function App() {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator initialRouteName="Login">
-//         <Stack.Screen
-//           name="MainDrawer"
-//           component={MainDrawer}
-//           options={{ headerShown: false }}
-//         />
-//         <Stack.Screen name="Login" component={Login} />
-//         <Stack.Screen name="Profile" component={Profile} />
-//         <Stack.Screen name="Settings" component={Settings} />
-//         <Stack.Screen name="Cadastro" component={Cadastro} options={{ headerShown: false }} />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-
-//   )
-// }
-// export default App;
-
-
-
-
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, View, Text } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -130,6 +75,11 @@ function Login({ navigation }) {
         title="Cadastro"
         onPress={() => navigation.navigate('cadastro')}
       />
+
+      <Button
+        title="Consultar cep"
+        onPress={() => navigation.navigate('cep')}
+      />
     </View>
   );
 }
@@ -156,23 +106,44 @@ function Profiles() {
   );
 }
 
-function Cep(){
-  return(
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <TextInput 
-        // style={{color:red}}
+function Cep({ navigation }) {
+  const [viacep, setViacep] = useState([]);
+  const [number, onChangeNumber] = useState(null);
+
+  const getViacep = async () => {
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${number}/json/`);
+      const json = await response.json();
+      setViacep(json);
+      console.log(json)
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <TextInput
+        style={{
+          height: 40,
+          margin: 12,
+          borderWidth: 1,
+          padding: 10,
+        }}
         onChangeText={onChangeNumber}
         value={number}
         placeholder="Digite o CEP"
         keyboardType='Numeric'
       />
-        <Button style={{title="Confirmar"}} onPress={getViacep} />
+      <Button style={{ color: 'red', with: '40%' }} title="Confirmar" onPress={getViacep} />
 
-        <Text>Localidade: {viacep.localide}</Text>
-        <Text>Logradouro: {viacep.logradouro}</Text>
-        <Text>Bairro: {viacep.bairro}</Text>
-        <Text>UF: {viacep.uf}</Text>
-        <Text>CEP: {number}</Text>
+      <Text>Localidade: {viacep.localide}</Text>
+      <Text>Logradouro: {viacep.logradouro}</Text>
+      <Text>Bairro: {viacep.bairro}</Text>
+      <Text>UF: {viacep.uf}</Text>
+      <Text>CEP: {number}</Text>
     </View>
   )
 }
@@ -180,48 +151,22 @@ function Cep(){
 const Stack = createNativeStackNavigator();
 function App() {
   return (
-    <View>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login">
-          <Stack.Screen
-            name="MainDrawer"
-            component={MainDrawer}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="Profile" component={Profile} />
-          <Stack.Screen name="Settings" component={Settings} />
-          <Stack.Screen name="Cadastro" component={Cadastro} />
-        </Stack.Navigator>
-      </NavigationContainer>
-
-
-      const [viacep, setViacep] = useState([]);
-      const [number, onChangeNumber] = useState(null);
-
-      const getViacep = async () => {
-        try {
-          const response = await fetch(`https://viacep.com.br/ws/${number}/json/</View>`);
-          const json = await response.json();
-          setViacep(json);
-          console.log(json)
-        } catch (error) {
-          console.error(error);
-        } finally {
-          //setLoading(false);
-        }
-      };
-    
-    </View>
-      
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen
+          name="MainDrawer"
+          component={MainDrawer}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="Cadastro" component={Cadastro} />
+        <Stack.Screen name="cep" component={Cep} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-
 }
 
 
 export default App;
-
-
-
-
-
