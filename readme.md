@@ -17,6 +17,8 @@ module.exports = {
   plugins: ['react-native-reanimated/plugin'],
 };
 
+npm install axios
+
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
      <Text>Login Screen</Text>
        <Button
