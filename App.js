@@ -1,6 +1,6 @@
 // import * as React from 'react';
-import React, { useEffect, useState } from 'react';
-import { Button, View, Text } from 'react-native';
+import { useEffect, useState} from 'react';
+import { Button, View, Text, Image, ActivityIndicator, FlatList} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -24,6 +24,53 @@ function HomeScreen({ navigation }) {
     </View>
   );
 }
+
+function RegScreen({ navigation }) {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  const baseUrl = 'http://localhost/php3ti'
+
+  useEffect(() => {
+    getApi()
+  }, []);
+
+  const getApi = async () => {
+    try {
+      const response = await fetch(`${baseUrl}/api/index.php`)
+      const json = await response.json()
+      setData(json)
+      console.log(json)
+    }
+    catch (error) {
+      console.error(error)
+    }
+    finally {
+      setLoading(false)
+    }
+  };
+  
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      {isLoading ? <ActivityIndicator /> : (
+        <FlatList
+          data={data}
+          keyExtractor={({ id }, index) => id}
+          renderItem={({ item }) => (
+            <View style={{ flexDirection: 'row', padding: 10, alignItems: "center" }}>
+              <Image source={{ uri: `${baseUrl}/${item.image}` }} style={{ width: 40, height: 40, borderRadius: 100 }} />
+              <Text>  {item.username} </Text>
+            </View>
+          )}
+        />
+      )}
+
+      <Text>Reg Screen</Text>
+      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    </View>
+  );
+}
+
 function NotificationsScreen({ navigation }) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -41,6 +88,7 @@ function MainDrawer() {
       <Drawer.Screen name="Notifications" component={NotificationsScreen} />
       <Drawer.Screen name="Settings" component={Settings} />
       <Drawer.Screen name="Cadastro" component={Cadastro} />
+      <Drawer.Screen name="RegScreen" component={RegScreen} />
     </Drawer.Navigator>
   )
 }
@@ -163,6 +211,7 @@ function App() {
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="Cadastro" component={Cadastro} />
         <Stack.Screen name="Cep" component={Cep} />
+        {/* <Stack.Screen name="RegScreen" component={RegScreen} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
