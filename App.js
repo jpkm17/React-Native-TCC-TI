@@ -1,6 +1,6 @@
 // import * as React from 'react';
-import { useEffect, useState} from 'react';
-import { Button, View, Text, Image, ActivityIndicator, FlatList} from 'react-native';
+import { useEffect, useState } from 'react';
+import { Button, View, Text, Image, ActivityIndicator, FlatList } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
@@ -49,7 +49,7 @@ function RegScreen({ navigation }) {
       setLoading(false)
     }
   };
-  
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       {isLoading ? <ActivityIndicator /> : (
@@ -133,13 +133,110 @@ function Login({ navigation }) {
 }
 
 function Cadastro({ navigation }) {
+
+  const baseUrl = 'http://localhost/php3ti'
+  const [isLoading, setLoading] = useState(true);
+
+  const [nome, onChangeName] = useState(null);
+  const [email, onChangeEmail] = useState(null);
+  const [senha, onChangeSenha] = useState(null);
+  const [end, onChangeEnd] = useState(null);
+  const [gen, onChangeGen] = useState(null);
+
+  const addUser = async () => {
+    try {
+      const requestOptions = {
+        method: 'POST',
+        body: JSON.stringify({ name: `${nome}`, username: `${email}`, password: `${senha}`, city: `${end}`, image: 'image/images.png', gender: `${gen}` })
+      };
+      const response = await fetch(`${baseUrl}/api/api-create.php`, requestOptions);
+      const json = await response.json();
+      console.log(json)
+
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Login</Text>
-      <Text>Tela de cadastro</Text>
+
+      <Text style={{
+        fontWeight: 'bold',
+        fontSize: '40px'
+      }}>Tela de cadastro</Text>
+
+      <TextInput
+        style={{
+          height: 40,
+          margin: 12,
+          borderWidth: 1,
+          padding: 10
+        }}
+        onChangeText={onChangeName}
+        value={nome}
+        placeholder="Digite seu nome"
+      />
+
+      <TextInput
+        style={{
+          height: 40,
+          margin: 12,
+          borderWidth: 1,
+          padding: 10
+        }}
+        onChangeText={onChangeEmail}
+        value={email}
+        placeholder="Digite seu email"
+      />
+
+
+      <TextInput
+        style={{
+          height: 40,
+          margin: 12,
+          borderWidth: 1,
+          padding: 10
+        }}
+        onChangeText={onChangeSenha}
+        value={senha}
+        placeholder="Digite sua Senha"
+      />
+
+      <TextInput
+        style={{
+          height: 40,
+          margin: 12,
+          borderWidth: 1,
+          padding: 10
+        }}
+        onChangeText={onChangeEnd}
+        value={end}
+        placeholder="Digite seu Endereço"
+      />
+
+      <TextInput
+        style={{
+          height: 40,
+          margin: 12,
+          borderWidth: 1,
+          padding: 10
+        }}
+        onChangeText={onChangeGen}
+        value={gen}
+        placeholder="Digite seu Gênero"
+      />
 
       <Button
-        title="Go to MainDrawer"
+        title="Cadastrar"
+        onPress={addUser}  
+      />
+
+
+      <Button
+        title="Voltar MainDrawer"
         onPress={() => navigation.navigate('MainDrawer')}
       />
     </View>
@@ -200,7 +297,7 @@ const Stack = createNativeStackNavigator();
 function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Login">
+      <Stack.Navigator initialRouteName="Cadastro">
         <Stack.Screen
           name="MainDrawer"
           component={MainDrawer}
