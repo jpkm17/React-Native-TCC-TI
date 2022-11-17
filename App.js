@@ -59,7 +59,7 @@ function RegScreen({ navigation }) {
           renderItem={({ item }) => (
             <View style={{ flexDirection: 'row', padding: 10, alignItems: "center" }}>
               <Image source={{ uri: `${baseUrl}/${item.image}` }} style={{ width: 40, height: 40, borderRadius: 100 }} />
-              <Text>  {item.username} </Text>
+              <Text>  {item.name} </Text>
             </View>
           )}
         />
